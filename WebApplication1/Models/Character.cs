@@ -5,11 +5,11 @@ namespace WebApplication1.Models;
 public class Character
 {
     [Key]
-    public int id { get; set; }
+    public int Id { get; set; }
     [MaxLength(50)]
-    public String firstName { get; set; } = string.Empty;
+    public String FirstName { get; set; } = string.Empty;
     [MaxLength(120)]
-    public String lastName { get; set; } = string.Empty;
+    public String LastName { get; set; } = string.Empty;
     private int CurrentWei { get; set; }
     private int MaxWeight { get; set; }
     
