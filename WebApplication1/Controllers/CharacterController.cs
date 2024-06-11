@@ -17,9 +17,9 @@ public class CharacterController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetCharacterData(int characterId)
     {
-        var characters = await _dbService.GetOrdersData(characterId);
+        var characters = await _dbService.GetCharactersData(characterId);
         
-        return Ok(orders.Select(e => new GetCharacterDTO()
+        return Ok(characters.Select(e => new GetCharacterDTO()
         {
             Id = e.Id,
             AcceptedAt = e.AcceptedAt,
