@@ -16,19 +16,12 @@ public class DatabaseContext : DbContext
     public DbSet<Character> Characters { get; set; }
     public DbSet<Title> Titles { get; set; }
     public DbSet<Backpack> Backpacks { get; set; }
-    public DbSet<Character_title> CharacterTitles { get; set; }
-
+    public DbSet<CharacterTitle> CharacterTitles { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
-        
-        modelBuilder.Entity<Item>().HasData(new List<Item>
-            {
-                new Item {
-                    Id = 1,
-                    Name = "Jan",
-                    Weight = 50
-                }
-            });
+        modelBuilder.Entity<Backpack>()
+            .HasKey(b => new { b.CharacterId, b.ItemId });
+        modelBuilder.Entity<CharacterTitle>()
+            .HasKey(ct => new { ct.CharacterId, ct.TitleId });
     }
 }

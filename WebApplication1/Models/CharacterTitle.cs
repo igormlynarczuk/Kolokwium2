@@ -5,7 +5,7 @@ namespace WebApplication1.Models;
 
 [Table("Character_title")]
 [PrimaryKey(nameof(CharacterId), nameof(TitleId))]
-public class Character_title
+public class CharacterTitle
 {
     public int CharacterId { get; set; }
     public int TitleId { get; set; }

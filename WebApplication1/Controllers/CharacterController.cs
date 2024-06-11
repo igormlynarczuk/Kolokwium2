@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WebApplication1.DTOs;
-using WebApplication1.Models;
 using WebApplication1.Services;
 
 namespace WebApplication1.Controllers;
@@ -15,38 +13,31 @@ public class CharacterController : ControllerBase
         _dbService = dbService;
     }
     
-    [HttpGet]
-    public async Task<IActionResult> GetCharacterData(int characterId)
+    [HttpGet("{characterId}")]
+    public async Task<IActionResult> GetCharacter(int characterId)
     {
-        var characters = await _dbService.GetCharactersData(characterId);
-
-        return Ok();
+        var character = await _dbService.GetCharacterAsync(characterId);
+        if (character == null)
+            return NotFound();
+        return Ok(character);
     }
-    
-    
-    
-    
-    
-    [HttpPost("{charactersID}/backpacks")]
-    public async Task<IActionResult> AddNewOrder(int characterID, NewItemDTO newItem)
+    [HttpPost("{characterId}/backpacks")]
+    public async Task<IActionResult> AddItemsToBackpack(int characterId, [FromBody] List<int> itemIds)
     {
-        if (!await _dbService.DoesCharacterExist(clientID))
-            return NotFound($"Client with given ID - {clientID} doesn't exist");
-
-        var Item = new Item()
+        try
         {
-            Id = characterID,
-            EmployeeId = newItem.EmployeeID,
-            AcceptedAt = newItem.AcceptedAt,
-        };
-    
-        
-        return Created("api/backpacks", new
+            var updatedBackpackItems = await _dbService.AddItemsToBackpackAsync(characterId, itemIds);
+            if (updatedBackpackItems == null)
+                return NotFound();
+            return Ok(updatedBackpackItems);
+        }
+        catch (ArgumentException ex)
         {
-            Id = order.Id,
-            order.AcceptedAt,
-            order.FulfilledAt,
-            order.Comments,
-        });
+            return BadRequest(ex.Message);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }

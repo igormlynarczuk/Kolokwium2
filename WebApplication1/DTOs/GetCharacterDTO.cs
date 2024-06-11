@@ -1,22 +1,17 @@
 ﻿namespace WebApplication1.DTOs;
 
-public class GetCharacterDTO
+public partial class GetCharacterDTO
 {
     public int Id { get; set; }
-    public String FirstName { get; set; } = null!;
-    public String LastName { get; set; } = null!;
-    private int CurrentWei { get; set; }
-    private int MaxWeight { get; set; }
+    public string FirstName { get; set; } = string.Empty;
+    public string LastName { get; set; } = string.Empty;
+    public int CurrentWeight { get; set; }
+    public int MaxWeight { get; set; }
+    public List<GetBackpackDTO> BackpackItems { get; set; } = new List<GetBackpackDTO>();
 }
-
-public class GetBackpackDTO
+public partial class GetBackpackDTO
 {
-    public string Name { get; set; } = null!;
-    public decimal Price { get; set; }
+    public string ItemName { get; set; } = string.Empty;
+    public int ItemWeight { get; set; }
     public int Amount { get; set; }
-}
-
-public class GetCharacter_titleDTO
-{
-    public DateTime AcquiredAt { get; set; }
 }
