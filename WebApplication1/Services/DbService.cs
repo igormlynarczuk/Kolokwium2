@@ -45,9 +45,6 @@ public class DbService: IDbService
            if (character == null)
                return null;
            var items = await _context.Items.Where(i => itemIds.Contains(i.Id)).ToListAsync();
-           if (items.Count != itemIds.Count)
-               throw new ArgumentException("One or more items do not exist.");
-           var totalWeight = items.Sum(i => i.Weight);
            foreach (var item in items)
            {
                var backpackItem = character.Backpacks.FirstOrDefault(b => b.ItemId == item.Id);
