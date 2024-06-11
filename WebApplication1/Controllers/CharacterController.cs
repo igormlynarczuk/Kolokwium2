@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApplication1.DTOs;
 using WebApplication1.Services;
 
 namespace WebApplication1.Controllers;
@@ -16,9 +17,9 @@ public class CharacterController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetCharacterData(int characterId)
     {
-        var clients = await _dbService.GetOrdersData(characterId);
+        var characters = await _dbService.GetOrdersData(characterId);
         
-        return Ok(orders.Select(e => new GetOrdersDTO()
+        return Ok(orders.Select(e => new GetCharacterDTO()
         {
             Id = e.Id,
             AcceptedAt = e.AcceptedAt,
