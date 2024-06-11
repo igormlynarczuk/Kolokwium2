@@ -15,7 +15,7 @@ public class DbService: IDbService
     public async Task<ICollection<Character>> GetCharactersData(int characterId)
     {
         return await _context.Characters
-            .Where(e => clientLastName == null || e.ch.LastName == clientLastName)
+            .Where(e => characterId == null || e.character.Id == characterId)
             .ToListAsync();
     }
     

@@ -18,19 +18,7 @@ public class CharacterController : ControllerBase
     public async Task<IActionResult> GetCharacterData(int characterId)
     {
         var characters = await _dbService.GetCharactersData(characterId);
-        
-        return Ok(characters.Select(e => new GetCharacterDTO()
-        {
-            Id = e.Id,
-            AcceptedAt = e.AcceptedAt,
-            FulfilledAt = e.FulfilledAt,
-            Comments = e.Comments,
-            Pastries = e.OrderPastries.Select(p => new GetOrdersPastryDTO
-            {
-                Name = p.Pastry.Name,
-                Price = p.Pastry.Price,
-                Amount = p.Amount
-            }).ToList()
-        }));
+
+        return Ok();
     }
 }
