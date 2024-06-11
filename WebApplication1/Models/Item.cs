@@ -5,9 +5,10 @@ namespace WebApplication1.Models;
 public class Item
 {
     [Key]
-    public int id;
+    public int id { get; set; }
 
-    public String name;
-    public int weight;
-    public ICollection<Backpack> Orders { get; set; } = new HashSet<Backpack>();
+    [MaxLength(100)]
+    public String name { get; set; } = string.Empty;
+    public int weight { get; set; }
+    public ICollection<Backpack> Backpacks { get; set; } = new HashSet<Backpack>();
 }
